@@ -1,0 +1,7 @@
+users:
+- name: Vanshika
+  comment: "Vanshika Goel"
+  password: iamvanshika
+- name: Chirag
+  comment: "Chirag Gupta"
+  password: iamchirag

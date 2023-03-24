@@ -1,0 +1,14 @@
+---
+- name: Ensure httpd is configured
+  hosts: all
+  become: true
+  tasks:
+  - name: Ensure {{ svc_name }} is present
+    yum:
+     name: "{{ svc_name }}"
+     state: present
+  - name: Ensure {{ svc_name }} is running
+    service:
+     name: "{{ svc_name }}"
+     state: started
+     enabled: true

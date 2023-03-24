@@ -1,0 +1,13 @@
+---
+- name: craete a directory and file
+  hosts: all
+  become: true
+  tasks:
+  - name: create a directory
+    file:
+     path: /tmp/data
+     state: directory
+  - name: create an empty file
+    file:
+     path: /tmp/data/practical
+     state: touch

@@ -1,0 +1,46 @@
+---
+- name: create webserver
+  hosts: all
+  ignore_errors: true
+  become: true
+  tasks:
+  - name: ensure httpd is installed
+    yum:
+     name: httpd
+     state: present
+  
+  - name: ensure httpd is started
+    service:
+     name: httpdd
+     state: started
+
+  - name: enable httpd in firewall
+    firewalld:
+     service: http
+     state: enabled
+     permanent: true
+     immediate: true
+  
+  - name: put content in index.html
+    copy:
+     content: "hello world\n"
+     dest: /var/www/html/index.html
+
+- name: is webserve reachable
+  hosts: all
+  become: true
+  tasks:
+  - name: check webserver
+    uri:
+     url: http://{{ ansible_host }}
+     return_content: true
+    register: webserver_content
+
+  - name: print variable
+    debug: 
+     var: webserver_content
+    
+  - name: webserver is running
+    debug:
+     msg: webserver is running
+    when: webserver_content.status == 200 

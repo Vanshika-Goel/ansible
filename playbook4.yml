@@ -1,0 +1,18 @@
+---
+- name: Ensure webserver is configured
+  hosts: all
+  become: true
+  vars_prompt:
+  - name: svc_name
+    prompt: Which package you want to install?
+    private: false
+  tasks:
+  - name: Ensure {{ svc_name }} is present
+    yum:
+     name: "{{ svc_name }}"
+     state: present
+  - name: Ensure {{ svc_name }} is running
+    service:
+     name: "{{ svc_name }}"
+     state: started
+     enabled: true

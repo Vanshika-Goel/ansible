@@ -1,0 +1,25 @@
+---
+- name: configuring etc issue
+  hosts: all
+  become: true
+  force_handlers: true
+  tasks:
+  - name: change the sshd config
+    lineinfile:
+     regexp: "#Banner none"
+     line: "Banner /etc/issue"
+     dest: /etc/sshd/sshd_config
+    notify: restart sshd service
+  
+  - name: copy the issue file
+    copy: 
+     src: issue
+     dest: /etc/issue
+     owner: root
+     group: root
+
+  handlers:
+  - name: restart sshd service
+    service:
+     name: sshd
+     state: restarted

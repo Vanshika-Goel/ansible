@@ -1,0 +1,21 @@
+---
+- name: create user
+  hosts: all
+  become: true
+  tasks: 
+  - name: create user
+    user:
+     name: "{{ item }}"
+     state: present
+    loop:
+    - student1
+    - student2
+    - student3
+
+  - name: starte multiple services
+    service:
+     name: "{{ item }}"
+     state: started
+    loop:
+    - httpd
+    - cups

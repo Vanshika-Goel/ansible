@@ -1,0 +1,24 @@
+---
+- name: Ensure webserver is configured
+  hosts: all
+  become: true
+  tasks:
+  - name: Ensure httpd is present
+    yum:
+     name: httpd
+     state: present
+  - name: Ensure httpd is running
+    service:
+     name: httpd
+     state: started
+     enabled: true
+  - name: Ensure index.html is present
+    copy:
+     content: "<h1> This is training </h1>\n"
+     dest: /var/www/html/index.html
+  - name: Enable http in firewall
+    firewalld:
+     service: http
+     state: enabled
+     immediate: true
+     permanent: true

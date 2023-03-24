@@ -1,0 +1,8 @@
+---
+- name: deploy jinja2 template
+  hosts: all
+  tasks:
+  - name: deploy template
+    template:
+     src: hwreport.j2
+     dest: /tmp/hwreport

@@ -1,0 +1,10 @@
+---   
+- name: install a package
+  hosts: all
+  become: true
+  tasks:
+  - name: install https here
+    yum:
+     name: httpd
+     state: present
+

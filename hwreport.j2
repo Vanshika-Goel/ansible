@@ -1,0 +1,6 @@
+OS: {{ ansible_facts['distribution'] }}
+Version: {{ ansible_facts['distribution_major_version'] }}
+CPU: {{ ansible_facts['processor_count'] }}
+IP ADDRESS: {{ ansible_facts['default_ipv4']['address'] }}
+FREE MEMORY IN MB: {{ ansible_facts['memfree_mb'] }}
+SIZE OF DISK SDA: {{ ansible_facts['devices']['sda']['size'] | default('NONE') }}

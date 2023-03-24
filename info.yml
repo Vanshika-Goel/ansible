@@ -1,0 +1,29 @@
+---
+- name: configure webserver
+  hosts: all
+  become: true
+  tasks:
+  - name: install httpd
+    yum:
+     name: httpd
+     state: present
+
+  - name: start httpd services
+    service:
+     name: httpd
+     state: started
+     enabled: true
+ 
+  - name: enable http in firewall
+    firewalld:
+     name: http
+     state: enabled
+     permanent: true
+     immediate: true
+
+  - name: check webserver
+    uri:
+     url: http://{{ ansible_host }}
+    template:
+     src: info.j2
+     dest: /home/student

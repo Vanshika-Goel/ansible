@@ -1,0 +1,9 @@
+---
+- name: fetch info from other nodes
+  hosts: all
+  tasks:
+  - name: fetch info 
+    synchronize:
+     src: /tmp/hwreport
+     dest: /home/student/playbook/reports
+     mode: pull

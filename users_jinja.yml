@@ -1,0 +1,10 @@
+---
+- name: Deploy jinja2 template
+  hosts: all
+  vars:
+   user_name: Vanshika
+  tasks:
+  - name: deploy template
+    template:
+     src: users.j2
+     dest: /tmp/users
